@@ -1,0 +1,102 @@
+<html>
+<head>
+	<style>
+	*{padding: 0; margin:0;}
+	canvas{ background: #eee; display: block; margin: 0 auto;}
+	</style>
+</head>
+
+<body>
+<canvas id= "myCanvas" width="1280" height="720"></canvas>
+<script type="text/javascript">
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+var lP = false;
+var rP = false;
+var uP = false;
+
+function keyDownHandler(e){
+	if(e.keyCode == 39){
+	rP = true;
+	}
+	else if(e.keyCode == 37)
+	{
+	lP = true;
+	}
+	if(e.keyCode == 38)
+	{
+	uP = true;
+	}	
+}
+
+function keyUpHandler(e){
+	if(e.keyCode == 39){
+	rP = false;
+	}
+	if(e.keyCode == 37)
+	{
+	lP = false;
+	}
+	if(e.keyCode == 38)
+	{
+	uP = false;
+	}	
+}
+
+function drawNeck()
+{
+ctx.beginPath();
+ctx.moveTo(560,45);
+ctx.lineTo(320,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(720,45);
+ctx.lineTo(960,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(560,45);
+ctx.lineTo(720,45);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(960,540);
+ctx.lineTo(320,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(586.66,45);
+ctx.lineTo(426.66,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(613.33,45);
+ctx.lineTo(533.33,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(640,45);
+ctx.lineTo(640,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(666.66,45);
+ctx.lineTo(746.66,540);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(693.33,45);
+ctx.lineTo(853.33,540);
+ctx.stroke();
+	
+}
+
+
+function draw()
+{
+drawNeck();
+//requestAnimationFrame(draw);
+}
+
+setInterval(draw,2);
+
+//draw();
+
+</script>
+</body>
+</html>
