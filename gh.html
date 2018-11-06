@@ -44,46 +44,63 @@ function keyUpHandler(e){
 	uP = false;
 	}	
 }
-
-function drawNeck()
-{
-ctx.beginPath();
-ctx.moveTo(560,45);
-ctx.lineTo(320,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(720,45);
-ctx.lineTo(960,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(560,45);
-ctx.lineTo(720,45);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(960,540);
-ctx.lineTo(320,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(586.66,45);
-ctx.lineTo(426.66,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(613.33,45);
-ctx.lineTo(533.33,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(640,45);
-ctx.lineTo(640,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(666.66,45);
-ctx.lineTo(746.66,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(693.33,45);
-ctx.lineTo(853.33,540);
-ctx.stroke();
+function drawNeck(){
+        line(320, 540, 960, 540);
+        line(560, 45 , 720, 45 );
+        for(var i = 0; i <= 6; i++){
+         	line(320+(640/6)*i, 540, 560+(160/6)*i, 45);
+        }
+}
 	
+function line(x1, y1, x2, y2, col)
+{
+	ctx.beginPath();
+	ctx.strokeStyle = col;
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
+	ctx.closePath();
+}
+function rect(x, y, w, h, col) 
+{
+	ctx.beginPath();
+	ctx.fillStyle = col;
+	ctx.fillRect(x, y, w, h);
+	ctx.fill();
+	ctx.closePath();	
+}
+function circle(x, y, r, col) 
+{
+	ctx.beginPath();
+	ctx.ellipse(x, y, r, r, 7, 0, 7);
+	ctx.fillStyle = col;
+	ctx.fill();
+	ctx.closePath();	
+}
+function line(x1, y1, x2, y2)
+{
+	ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
+	ctx.closePath();
+}
+function rect(x, y, w, h) 
+{
+	ctx.beginPath();
+	ctx.fillStyle = "black";
+	ctx.fillRect(x, y, w, h);
+	ctx.fill();
+	ctx.closePath();	
+}
+function circle(x, y, r) 
+{
+	ctx.beginPath();
+	ctx.ellipse(x, y, r, r, 7, 0, 7);
+	ctx.fillStyle = "black";
+	ctx.fill();
+	ctx.closePath();	
 }
 
 
