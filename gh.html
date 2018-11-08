@@ -16,19 +16,50 @@ document.addEventListener("keyup", keyUpHandler, false);
 var lP = false;
 var rP = false;
 var uP = false;
+//green red yellow blue orange
+var greenButton = false;
+var redButton = false;
+var yellowButton = false;
+var blueButton = false;
+var orangeButton = false;
+var strumUp = false;
+var strumDown = false;
 
 function keyDownHandler(e){
-	if(e.keyCode == 39){
-	rP = true;
+	if(e.keyCode == 65){
+	//A key
+	greenButton = true;
 	}
-	else if(e.keyCode == 37)
+	if(e.keyCode == 83)
 	{
-	lP = true;
+	//S key
+	redButton = true;
 	}
-	if(e.keyCode == 38)
+	if(e.keyCode == 68)
 	{
-	uP = true;
-	}	
+	//D key
+	yellowButton = true;
+	}
+	if(e.keyCode == 70)
+	{
+	//F key
+	blueButton = true;
+	}
+	if(e.keyCode == 32)
+	{
+	//Space bar
+	orangeButton = true;
+	}
+	if(e.keyCode == 75)
+	{
+	//K key
+	strumUp = true;
+	}
+	if(e.keyCode == 76)
+	{
+	//L Key
+	strumDown = true;
+	}		
 }
 
 function keyUpHandler(e){
