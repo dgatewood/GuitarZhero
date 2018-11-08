@@ -62,22 +62,51 @@ function keyDownHandler(e){
 	}		
 }
 
+function handleKeys()
+{
+	
+}
+
 function keyUpHandler(e){
-	if(e.keyCode == 39){
-	rP = false;
+	if(e.keyCode == 65){
+	//A key
+	greenButton = false;
 	}
-	if(e.keyCode == 37)
+	if(e.keyCode == 83)
 	{
-	lP = false;
+	//S key
+	redButton = false;
 	}
-	if(e.keyCode == 38)
+	if(e.keyCode == 68)
 	{
-	uP = false;
-	}	
+	//D key
+	yellowButton = false;
+	}
+	if(e.keyCode == 70)
+	{
+	//F key
+	blueButton = false;
+	}
+	if(e.keyCode == 32)
+	{
+	//Space bar
+	orangeButton = false;
+	}
+	if(e.keyCode == 75)
+	{
+	//K key
+	strumUp = false;
+	}
+	if(e.keyCode == 76)
+	{
+	//L Key
+	strumDown = false;
+	}
 }
 
 function drawNeck()
 {
+ctx.strokeStyle = "black";
 ctx.beginPath();
 ctx.moveTo(560,45);
 ctx.lineTo(320,540);
@@ -114,6 +143,37 @@ ctx.beginPath();
 ctx.moveTo(693.33,45);
 ctx.lineTo(853.33,540);
 ctx.stroke();
+
+ctx.beginPath();
+ctx.fillStyle = "#eee";
+ctx.strokeStyle = "green";
+ctx.ellipse(426.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+ctx.fill();
+ctx.stroke();
+ctx.beginPath();
+ctx.fillStyle = "#eee";
+ctx.strokeStyle = "red";
+ctx.ellipse(533.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+ctx.fill();
+ctx.stroke();
+ctx.beginPath();
+ctx.fillStyle = "#eee";
+ctx.strokeStyle = "yellow";
+ctx.ellipse(640, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+ctx.fill();
+ctx.stroke();
+ctx.beginPath();
+ctx.fillStyle = "#eee";
+ctx.strokeStyle = "blue";
+ctx.ellipse(746.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+ctx.fill();
+ctx.stroke();
+ctx.beginPath();
+ctx.fillStyle = "#eee";
+ctx.strokeStyle = "orange";
+ctx.ellipse(853.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+ctx.fill();
+ctx.stroke();
 	
 }
 
@@ -124,7 +184,7 @@ drawNeck();
 //requestAnimationFrame(draw);
 }
 
-setInterval(draw,2);
+setInterval(draw,1);
 
 //draw();
 
