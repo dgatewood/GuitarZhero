@@ -1,9 +1,9 @@
 <html>
 <head>
-	<style>
-	*{padding: 0; margin:0;}
-	canvas{ background: #eee; display: block; margin: 0 auto;}
-	</style>
+<style>
+*{padding: 0; margin:0;}
+canvas{ background: #eee; display: block; margin: 0 auto;}
+</style>
 </head>
 
 <body>
@@ -26,124 +26,95 @@ var strumUp = false;
 var strumDown = false;
 
 function keyDownHandler(e){
-	if(e.keyCode == 65){
-	//A key
-	greenButton = true;
-	}
-	if(e.keyCode == 83)
-	{
-	//S key
-	redButton = true;
-	}
-	if(e.keyCode == 68)
-	{
-	//D key
-	yellowButton = true;
-	}
-	if(e.keyCode == 70)
-	{
-	//F key
-	blueButton = true;
-	}
-	if(e.keyCode == 32)
-	{
-	//Space bar
-	orangeButton = true;
-	}
-	if(e.keyCode == 75)
-	{
-	//K key
-	strumUp = true;
-	}
-	if(e.keyCode == 76)
-	{
-	//L Key
-	strumDown = true;
-	}		
+if(e.keyCode == 65){
+//A key
+greenButton = true;
+}
+if(e.keyCode == 83)
+{
+//S key
+redButton = true;
+}
+if(e.keyCode == 68)
+{
+//D key
+yellowButton = true;
+}
+if(e.keyCode == 70)
+{
+//F key
+blueButton = true;
+}
+if(e.keyCode == 32)
+{
+//Space bar
+orangeButton = true;
+}
+if(e.keyCode == 75)
+{
+//K key
+strumUp = true;
+}
+if(e.keyCode == 76)
+{
+//L Key
+strumDown = true;
+}		
 }
 
 function handleKeys()
 {
-	
+
 }
 
 function keyUpHandler(e){
-	if(e.keyCode == 65){
-	//A key
-	greenButton = false;
-	}
-	if(e.keyCode == 83)
-	{
-	//S key
-	redButton = false;
-	}
-	if(e.keyCode == 68)
-	{
-	//D key
-	yellowButton = false;
-	}
-	if(e.keyCode == 70)
-	{
-	//F key
-	blueButton = false;
-	}
-	if(e.keyCode == 32)
-	{
-	//Space bar
-	orangeButton = false;
-	}
-	if(e.keyCode == 75)
-	{
-	//K key
-	strumUp = false;
-	}
-	if(e.keyCode == 76)
-	{
-	//L Key
-	strumDown = false;
-	}
+if(e.keyCode == 65){
+//A key
+greenButton = false;
+}
+if(e.keyCode == 83)
+{
+//S key
+redButton = false;
+}
+if(e.keyCode == 68)
+{
+//D key
+yellowButton = false;
+}
+if(e.keyCode == 70)
+{
+//F key
+blueButton = false;
+}
+if(e.keyCode == 32)
+{
+//Space bar
+orangeButton = false;
+}
+if(e.keyCode == 75)
+{
+//K key
+strumUp = false;
+}
+if(e.keyCode == 76)
+{
+//L Key
+strumDown = false;
+}
 }
 
 function drawNeck()
 {
-ctx.strokeStyle = "black";
-ctx.beginPath();
-ctx.moveTo(560,45);
-ctx.lineTo(320,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(720,45);
-ctx.lineTo(960,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(560,45);
-ctx.lineTo(720,45);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(960,540);
-ctx.lineTo(320,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(586.66,45);
-ctx.lineTo(426.66,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(613.33,45);
-ctx.lineTo(533.33,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(640,45);
-ctx.lineTo(640,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(666.66,45);
-ctx.lineTo(746.66,540);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(693.33,45);
-ctx.lineTo(853.33,540);
-ctx.stroke();
-
+line(560   ,45 ,320   ,540);
+line(720   ,45 ,960   ,540);
+line(560   ,45 ,720   ,45 );
+line(960   ,540,320   ,540);
+line(586.66,45 ,426.66,540);
+line(613.33,45 ,533.33,540);
+line(640   ,45 ,640   ,540);
+line(666.66,45 ,746.66,540);
+line(693.33,45 ,853.33,540);
 ctx.beginPath();
 if(greenButton)
 {
@@ -209,7 +180,36 @@ ctx.strokeStyle = "orange";
 ctx.ellipse(853.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
 ctx.fill();
 ctx.stroke();
-	
+
+}
+function line(x1, y1, x2, y2, col = "black")
+{
+ctx.beginPath();
+ctx.strokeStyle = col;
+ctx.moveTo(x1, y1);
+ctx.lineTo(x2, y2);
+ctx.stroke();
+ctx.closePath();
+}
+function rect(x, y, w, h, col = "black") 
+{
+ctx.beginPath();
+ctx.fillStyle = col;
+ctx.fillRect(x, y, w, h);
+ctx.fill();
+ctx.closePath();	
+}
+function circle(x, y, r, col = "black", stroke = "NoStroke") 
+{
+ctx.beginPath();
+ctx.ellipse(x, y, r, r, 7, 0, 7);
+ctx.fillStyle = col; 
+if(stroke != "NoStroke"){
+ctx.strokeStyle = stroke;
+ctx.stroke();
+}
+ctx.fill();
+ctx.closePath();	
 }
 
 
