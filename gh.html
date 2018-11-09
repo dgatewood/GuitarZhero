@@ -16,6 +16,8 @@ document.addEventListener("keyup", keyUpHandler, false);
 var lP = false;
 var rP = false;
 var uP = false;
+var gameTime = 0;
+var lastRender = 0;
 //green red yellow blue orange
 var greenButton = false;
 var redButton = false;
@@ -24,6 +26,60 @@ var blueButton = false;
 var orangeButton = false;
 var strumUp = false;
 var strumDown = false;
+
+var notes = [];
+
+function Note(t1, t2, b, l){
+	this.time = t1;
+	this.type = t2;
+	this.button = b;
+	this.length = l;
+	this.y = 0;
+}
+
+for(var i = 0; i < 50; i++)
+{
+var time = i * 50;
+var type = N;
+var button = i%6;
+
+	notes[i] = new Note(time, "N", button, 0);
+}
+
+function drawNotes(progress){
+	for(var i = 0; i < notes.length; i++)
+	{
+		if(notes[i].time >= lastRender && notes[i].time <= lastRender+progress)
+		{
+		if(notes[i].button == 0)
+		{
+			var x = y/46.1;
+			ctx.beginPath();
+			ctx.fillStyle = "green";
+			ctx.strokeStyle = "green";
+			ctx.ellipse(426.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.fill();
+			ctx.stroke();
+		}
+		if(notes[i].button == 1)
+		{
+		
+		}
+		if(notes[i].button == 2)
+		{
+		
+		}
+		if(notes[i].button == 3)
+		{
+		
+		}
+		if(notes[i].button == 4)
+		{
+		
+		}
+	}
+	}
+}
 
 function keyDownHandler(e){
 if(e.keyCode == 65){
@@ -213,13 +269,19 @@ ctx.closePath();
 }
 
 
-function draw()
+function draw(timestamp)
 {
+var progress = timestamp - lastRender;
+gameTime++;
 drawNeck();
-//requestAnimationFrame(draw);
+
+lastRender = timestamp;
+requestAnimationFrame(draw);
 }
 
-setInterval(draw,1);
+requestAnimationFrame(draw);
+
+//setInterval(draw,1);
 
 //draw();
 
