@@ -24,7 +24,6 @@ var blueButton = false;
 var orangeButton = false;
 var strumUp = false;
 var strumDown = false;
-
 function keyDownHandler(e){
 if(e.keyCode == 65){
 //A key
@@ -61,12 +60,9 @@ if(e.keyCode == 76)
 strumDown = true;
 }		
 }
-
 function handleKeys()
 {
-
 }
-
 function keyUpHandler(e){
 if(e.keyCode == 65){
 //A key
@@ -103,7 +99,6 @@ if(e.keyCode == 76)
 strumDown = false;
 }
 }
-
 function drawNeck()
 {
 line(560   ,45 ,320   ,540);
@@ -115,72 +110,15 @@ line(613.33,45 ,533.33,540);
 line(640   ,45 ,640   ,540);
 line(666.66,45 ,746.66,540);
 line(693.33,45 ,853.33,540);
-ctx.beginPath();
-if(greenButton)
-{
-ctx.fillStyle = "green";
+circle(426.6, 540, 15, backIf("green" , greenButton ), "green" );
+circle(533.3, 540, 15, backIf("red"   , redButton   ), "red"   );
+circle(640  , 540, 15, backIf("yellow", yellowButton), "yellow");
+circle(746.6, 540, 15, backIf("blue"  , blueButton  ), "blue"  );
+circle(853.3, 540, 15, backIf("orange", orangeButton), "orange");
 }
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "green";
-ctx.ellipse(426.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(redButton)
-{
-ctx.fillStyle = "red";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "red";
-ctx.ellipse(533.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(yellowButton)
-{
-ctx.fillStyle = "yellow";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "yellow";
-ctx.ellipse(640, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(blueButton)
-{
-ctx.fillStyle = "blue";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "blue";
-ctx.ellipse(746.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(orangeButton)
-{
-ctx.fillStyle = "orange";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "orange";
-ctx.ellipse(853.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-
+function backIf(out, con){
+if(con)return out;
+else return "#eee";
 }
 function line(x1, y1, x2, y2, col = "black")
 {
@@ -211,18 +149,13 @@ ctx.stroke();
 ctx.fill();
 ctx.closePath();	
 }
-
-
 function draw()
 {
 drawNeck();
 //requestAnimationFrame(draw);
 }
-
 setInterval(draw,1);
-
 //draw();
-
 </script>
 </body>
 </html>
