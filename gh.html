@@ -27,6 +27,7 @@ var orangeButton = false;
 var strumUp = false;
 var strumDown = false;
 
+
 var notes = [];
 
 function Note(t1, t2, b, l){
@@ -48,17 +49,25 @@ var button = i%6;
 function drawNotes(progress){
 	for(var i = 0; i < notes.length; i++)
 	{
-		if(notes[i].time >= lastRender && notes[i].time <= lastRender+progress)
+	
+		if(notes[i].time <= gameTime && gameTime <= notes[i].time + 5000)
 		{
+		console.log("Game time is: " + gameTime + " notes[i].time = " +notes[i].time);
+		var y = ((gameTime - notes[i].time)/10) + 45;
+		console.log("Value of (gameTime - notes[i].time) is equal to " + (gameTime - notes[i].time));
+		console.log("Y value is: " + y);
 		if(notes[i].button == 0)
 		{
+			
 			var x = y/46.1;
 			ctx.beginPath();
 			ctx.fillStyle = "green";
 			ctx.strokeStyle = "green";
-			ctx.ellipse(426.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
+			console.log("X value : " + x + "Y value = " + y);
+			console.log("Game time is : " + gameTime);
 		}
 		if(notes[i].button == 1)
 		{
@@ -271,9 +280,9 @@ ctx.closePath();
 function draw(timestamp)
 {
 var progress = timestamp - lastRender;
-gameTime++;
 drawNeck();
-
+drawNotes(progress);
+gameTime += progress;
 lastRender = timestamp;
 requestAnimationFrame(draw);
 }
