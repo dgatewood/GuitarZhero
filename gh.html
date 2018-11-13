@@ -83,11 +83,11 @@ function drawNotes(progress){
 		}
 		if(notes[i].button == 2)
 		{
-			var x = y/-3.093;
+			var x = 640;
 			ctx.beginPath();
 			ctx.fillStyle = "yellow";
 			ctx.strokeStyle = "yellow";
-			ctx.ellipse(x+600, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
@@ -95,11 +95,11 @@ function drawNotes(progress){
 		}
 		if(notes[i].button == 3)
 		{
-			var x = y/-3.093;
+			var x = y/6.19;
 			ctx.beginPath();
 			ctx.fillStyle = "blue";
 			ctx.strokeStyle = "blue";
-			ctx.ellipse(x+600, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+660, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
@@ -107,11 +107,11 @@ function drawNotes(progress){
 		}
 		if(notes[i].button == 4)
 		{
-			var x = y/-3.093;
+			var x = y/3.093;
 			ctx.beginPath();
 			ctx.fillStyle = "orange";
 			ctx.strokeStyle = "orange";
-			ctx.ellipse(x+600, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+680, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
