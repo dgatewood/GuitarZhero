@@ -63,7 +63,7 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "green";
 			ctx.strokeStyle = "green";
-			ctx.ellipse(x+600, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+600, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
@@ -75,7 +75,7 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "red";
 			ctx.strokeStyle = "red";
-			ctx.ellipse(x+620, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+620, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
@@ -87,7 +87,7 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "yellow";
 			ctx.strokeStyle = "yellow";
-			ctx.ellipse(x, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
@@ -99,7 +99,7 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "blue";
 			ctx.strokeStyle = "blue";
-			ctx.ellipse(x+660, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+660, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
@@ -111,7 +111,7 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "orange";
 			ctx.strokeStyle = "orange";
-			ctx.ellipse(x+680, y, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+680, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
