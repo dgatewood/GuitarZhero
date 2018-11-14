@@ -87,6 +87,13 @@ function drawNotes(progress){
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
 			console.log("Game time is : " + gameTime);
+			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			{
+				if(redButton && strum)
+				{
+					console.log("Congrats dude");
+				}
+			}
 		}
 		if(notes[i].button == 2)
 		{
@@ -99,6 +106,13 @@ function drawNotes(progress){
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
 			console.log("Game time is : " + gameTime);
+			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			{
+				if(yellowButton && strum)
+				{
+					console.log("Congrats dude");
+				}
+			}
 		}
 		if(notes[i].button == 3)
 		{
@@ -111,6 +125,13 @@ function drawNotes(progress){
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
 			console.log("Game time is : " + gameTime);
+			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			{
+				if(blueButton && strum)
+				{
+					console.log("Congrats dude");
+				}
+			}
 		}
 		if(notes[i].button == 4)
 		{
@@ -123,6 +144,13 @@ function drawNotes(progress){
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
 			console.log("Game time is : " + gameTime);
+			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			{
+				if(orangeButton && strum)
+				{
+					console.log("Congrats dude");
+				}
+			}
 		}
 	}
 	}
