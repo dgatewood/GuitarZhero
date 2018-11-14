@@ -24,8 +24,7 @@ var redButton = false;
 var yellowButton = false;
 var blueButton = false;
 var orangeButton = false;
-var strumUp = false;
-var strumDown = false;
+var strum = false;
 
 
 var notes = [];
@@ -50,15 +49,16 @@ function drawNotes(progress){
 	for(var i = 0; i < notes.length; i++)
 	{
 	
+	
 		if(notes[i].time <= gameTime && gameTime <= notes[i].time + 5000)
 		{
 		console.log("Game time is: " + gameTime + " notes[i].time = " +notes[i].time);
-		var y = ((gameTime - notes[i].time)/10) + 45;
+		var per = ((gameTime - notes[i].time)/5000);
+		var y = (per * 100) + (per * per * 400)  + 45;
 		console.log("Value of (gameTime - notes[i].time) is equal to " + (gameTime - notes[i].time));
 		console.log("Y value is: " + y);
 		if(notes[i].button == 0)
 		{
-			
 			var x = y/-3.093;
 			ctx.beginPath();
 			ctx.fillStyle = "green";
@@ -68,6 +68,13 @@ function drawNotes(progress){
 			ctx.stroke();
 			console.log("X value : " + x + "Y value = " + y);
 			console.log("Game time is : " + gameTime);
+			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			{
+				if(greenButton && strum)
+				{
+					console.log("Congrats dude");
+				}
+			}
 		}
 		if(notes[i].button == 1)
 		{
@@ -149,19 +156,15 @@ orangeButton = true;
 if(e.keyCode == 75)
 {
 //K key
-strumUp = true;
+strum = true;
 }
 if(e.keyCode == 76)
 {
 //L Key
-strumDown = true;
+strum = true;
 }		
 }
 
-function handleKeys()
-{
-
-}
 
 function keyUpHandler(e){
 if(e.keyCode == 65){
@@ -191,12 +194,12 @@ orangeButton = false;
 if(e.keyCode == 75)
 {
 //K key
-strumUp = false;
+strum = false;
 }
 if(e.keyCode == 76)
 {
 //L Key
-strumDown = false;
+strum = false;
 }
 }
 
