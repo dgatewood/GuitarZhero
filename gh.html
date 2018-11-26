@@ -36,7 +36,7 @@ var strum = false;
 var audio = new Audio('guitar.ogg');
 var songPlaying = false;
 var getSong = true;
-var song_notes;
+var song_notes = [];
 var song_notes2;
 var isLoading = true;
 
@@ -364,8 +364,6 @@ ctx.closePath();
 function loadingScreen(){
 if(getSong)
 {
-
-	var song_notes = [];
 	$.getJSON( "notes.json", function( data){
 	JSONItems = data;
 	console.log(song_notes);
