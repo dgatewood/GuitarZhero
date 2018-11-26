@@ -1,6 +1,6 @@
-{
-"noteTimes" : {
-"note" : [
+{ 
+"array" :
+[
 {"time":  5760 ,"type":"N","button":0,"length":0},
 {"time":  5760 ,"type":"N","button":1,"length":0},
 {"time":  6000 ,"type":"N","button":0,"length":0},
@@ -1284,5 +1284,4 @@
 {"time":  266160 ,"type":"N","button":7,"length":0},
 {"time":  266400 ,"type":"N","button":7,"length":0},
 {"time":  266640 ,"type":"N","button":7,"length":0}]
-}
 }

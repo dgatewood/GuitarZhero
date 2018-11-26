@@ -4,6 +4,7 @@
 *{padding: 0; margin:0;}
 canvas{ background: #eee; display: block; margin: 0 auto;}
 </style>
+<script src="jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -13,6 +14,13 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+canvas.addEventListener("mousedown", getPosition, false);
+canvas.addEventListener("mouseup", getPosition2, false);
+
+var x = 0;
+var y = 0;
+var mouseIsDown = false;
+
 var lP = false;
 var rP = false;
 var uP = false;
@@ -25,6 +33,14 @@ var yellowButton = false;
 var blueButton = false;
 var orangeButton = false;
 var strum = false;
+var audio = new Audio('guitar.ogg');
+var songPlaying = false;
+var getSong = true;
+var song_notes;
+var song_notes2;
+var isLoading = true;
+
+
 
 
 var notes = [];
@@ -52,11 +68,9 @@ function drawNotes(progress){
 	
 		if(notes[i].time <= gameTime && gameTime <= notes[i].time + 5000)
 		{
-		console.log("Game time is: " + gameTime + " notes[i].time = " +notes[i].time);
 		var per = ((gameTime - notes[i].time)/5000);
 		var y = (per * 100) + (per * per * 400)  + 45;
-		console.log("Value of (gameTime - notes[i].time) is equal to " + (gameTime - notes[i].time));
-		console.log("Y value is: " + y);
+		
 		if(notes[i].button == 0)
 		{
 			var x = y/-3.093;
@@ -66,8 +80,7 @@ function drawNotes(progress){
 			ctx.ellipse(x+600, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
-			console.log("X value : " + x + "Y value = " + y);
-			console.log("Game time is : " + gameTime);
+			
 			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
 			{
 				if(greenButton && strum)
@@ -85,8 +98,7 @@ function drawNotes(progress){
 			ctx.ellipse(x+620, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
-			console.log("X value : " + x + "Y value = " + y);
-			console.log("Game time is : " + gameTime);
+			
 			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
 			{
 				if(redButton && strum)
@@ -104,8 +116,7 @@ function drawNotes(progress){
 			ctx.ellipse(x, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
-			console.log("X value : " + x + "Y value = " + y);
-			console.log("Game time is : " + gameTime);
+			
 			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
 			{
 				if(yellowButton && strum)
@@ -123,8 +134,7 @@ function drawNotes(progress){
 			ctx.ellipse(x+660, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
-			console.log("X value : " + x + "Y value = " + y);
-			console.log("Game time is : " + gameTime);
+			
 			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
 			{
 				if(blueButton && strum)
@@ -142,8 +152,7 @@ function drawNotes(progress){
 			ctx.ellipse(x+680, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
-			console.log("X value : " + x + "Y value = " + y);
-			console.log("Game time is : " + gameTime);
+			
 			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
 			{
 				if(orangeButton && strum)
@@ -154,6 +163,19 @@ function drawNotes(progress){
 		}
 	}
 	}
+}
+
+function getPosition2(event){
+	mouseIsDown = false;
+}
+
+function getPosition(event)
+{
+  x = event.x - canvas.offsetLeft;
+  y = event.y - canvas.offsetTop;
+	mouseIsDown = true;
+	console.log("Mouse is pressed");
+  //alert("x:" + x + " y:" + y);
 }
 
 function keyDownHandler(e){
@@ -339,9 +361,67 @@ ctx.fill();
 ctx.closePath();	
 }
 
+function loadingScreen(){
+if(getSong)
+{
+	song_notes= new JSONArray("notes.json");	
+	getSong = false;
+}
+	ctx.clearRect(0, 0 , 1200, 1200);
+	ctx.fillText("Guitar Zhero", 100, 100);
+	////ctx.fillStyle = "red";
+	if(mouseIsDown)
+	{
+		ctx.fillStyle = "red";
+		ctx.beginPath();
+		ctx.rect(250, 250, 200,200);
+		ctx.fill();
+		ctx.fillStyle = "black";
+		ctx.beginPath();
+		ctx.rect(270, 270, 160,160);
+		ctx.fill();
+		isLoading = false;
+	}
+	else{
+		ctx.fillStyle = "red";
+		ctx.fillRect(250, 250, 200,200);
+	}
+	if(!isLoading)
+	{
+	ctx.clearRect(0,0,1200,1400);
+	requestAnimationFrame(draw);
+	}
+	else
+	{
+	requestAnimationFrame(loadingScreen);
+	}
+	}
 
 function draw(timestamp)
 {
+if(!songPlaying)
+{
+	audio.play();
+	console.log("A song should be playing");
+	songPlaying = true;
+}
+
+
+
+console.log("This should be song_notes" + song_notes[0]);
+
+
+for( var i = 0; i < song_notes.noteTimes.note.length; i++)
+{
+	console.log(song_notes.noteTimes.note[i].time);
+	if(song_notes.noteTimes[i].time > gameTime - 7000)
+	{
+		new Note(song_notes.noteTimes[i].time, "N", song_notes.noteTimes[i].button, song_notes.noteTimes[i].length);
+		notes.push(new Note(song_notes.noteTimes.note[i].time, "N", song_notes.noteTimes.note[i].button, song_notes.noteTimes.note[i].length));
+		console.log("Added a note to notes");
+	}
+}
+
 ctx.clearRect(0,0,1400,1000);
 var progress = timestamp - lastRender;
 drawNeck();
@@ -351,7 +431,16 @@ lastRender = timestamp;
 requestAnimationFrame(draw);
 }
 
+if(isLoading)
+{
+///load screen
+requestAnimationFrame(loadingScreen);
+}
+else
+{
+///Game time
 requestAnimationFrame(draw);
+}
 
 //setInterval(draw,1);
 
