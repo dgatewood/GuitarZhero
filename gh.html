@@ -364,7 +364,12 @@ ctx.closePath();
 function loadingScreen(){
 if(getSong)
 {
-	song_notes= new JSONArray("notes.json");	
+
+	var song_notes = [];
+	$.getJSON( "notes.json", function( data){
+	JSONItems = data;
+	console.log(song_notes);
+	});	
 	getSong = false;
 }
 	ctx.clearRect(0, 0 , 1200, 1200);
