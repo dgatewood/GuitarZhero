@@ -370,6 +370,7 @@ if(getSong)
 		var l = data.array[a].length;
 		allNotes[a] = new Note(t1, t2, b, l);
 	}
+	console.log(allNotes[0].time + " is from the array");
 	songLoaded = true;
 	});	
 	getSong = false;
