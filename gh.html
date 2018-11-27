@@ -36,9 +36,10 @@ var strum = false;
 var audio = new Audio('guitar.ogg');
 var songPlaying = false;
 var getSong = true;
-var song_notes = [];
+var song_notes = {};
 var song_notes2;
 var isLoading = true;
+var songLoaded = false;
 
 
 
@@ -364,12 +365,19 @@ ctx.closePath();
 function loadingScreen(){
 if(getSong)
 {
-	$.getJSON( "notes.json", function( data){
-	JSONItems = data;
-	console.log(song_notes);
+	$.getJSON( "notes.json", function(data){
+	console.log("This is the data" + data);
+	song_notes = data;
+	///accessing the data the right way
+	console.log("accessing data " + data.array[0].time);
+	songLoaded = true;
+	
 	});	
 	getSong = false;
 }
+
+///console.log("This is outside of getsong" + song_notes.array[0].time);
+
 	ctx.clearRect(0, 0 , 1200, 1200);
 	ctx.fillText("Guitar Zhero", 100, 100);
 	////ctx.fillStyle = "red";
@@ -410,20 +418,16 @@ if(!songPlaying)
 }
 
 
-
-console.log("This should be song_notes" + song_notes[0]);
-
-
-for( var i = 0; i < song_notes.noteTimes.note.length; i++)
-{
-	console.log(song_notes.noteTimes.note[i].time);
-	if(song_notes.noteTimes[i].time > gameTime - 7000)
-	{
-		new Note(song_notes.noteTimes[i].time, "N", song_notes.noteTimes[i].button, song_notes.noteTimes[i].length);
-		notes.push(new Note(song_notes.noteTimes.note[i].time, "N", song_notes.noteTimes.note[i].button, song_notes.noteTimes.note[i].length));
-		console.log("Added a note to notes");
-	}
-}
+<!-- for( var i = 0; i < song_notes.noteTimes.note.length; i++) -->
+<!-- { -->
+	<!-- console.log(song_notes.noteTimes.note[i].time); -->
+	<!-- if(song_notes.noteTimes[i].time > gameTime - 7000) -->
+	<!-- { -->
+		<!-- new Note(song_notes.noteTimes[i].time, "N", song_notes.noteTimes[i].button, song_notes.noteTimes[i].length); -->
+		<!-- notes.push(new Note(song_notes.noteTimes.note[i].time, "N", song_notes.noteTimes.note[i].button, song_notes.noteTimes.note[i].length)); -->
+		<!-- console.log("Added a note to notes"); -->
+	<!-- } -->
+<!-- } -->
 
 ctx.clearRect(0,0,1400,1000);
 var progress = timestamp - lastRender;
