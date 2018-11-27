@@ -42,9 +42,9 @@ var isLoading = true;
 var songLoaded = false;
 
 
+var allNotes = []; // all song notes
 
-
-var notes = [];
+var notes = []; //song notes within 5000 ms.
 
 function Note(t1, t2, b, l){
 	this.time = t1;
@@ -52,14 +52,6 @@ function Note(t1, t2, b, l){
 	this.button = b;
 	this.length = l;
 	this.y = 0;
-}
-
-for(var i = 0; i < 50; i++)
-{
-var time = i * 50;
-var button = i%6;
-
-	notes[i] = new Note(time, "N", button, 0);
 }
 
 function drawNotes(progress){
@@ -370,8 +362,15 @@ if(getSong)
 	song_notes = data;
 	///accessing the data the right way
 	console.log("accessing data " + data.array[0].time);
+	for(var a = 0; a < data.array.length; a++)
+	{
+		var t1 = data.array[a].time;
+		var t2 = data.array[a].type;
+		var b = data.array[a].button;
+		var l = data.array[a].length;
+		allNotes[a] = new Note(t1, t2, b, l);
+	}
 	songLoaded = true;
-	
 	});	
 	getSong = false;
 }
