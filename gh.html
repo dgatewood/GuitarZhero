@@ -58,7 +58,7 @@ function drawNotes(progress){
 	for(var i = 0; i < notes.length; i++)
 	{
 	
-	
+		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
 		if(notes[i].time <= gameTime && gameTime <= notes[i].time + 5000)
 		{
 		var per = ((gameTime - notes[i].time)/5000);
@@ -362,7 +362,7 @@ if(getSong)
 	song_notes = data;
 	///accessing the data the right way
 	console.log("accessing data " + data.array[0].time);
-	for(var a = 0; a < data.array.length; a++)
+	for(var a = data.array.length-1; a >= 0; a--)
 	{
 		var t1 = data.array[a].time;
 		var t2 = data.array[a].type;
@@ -370,7 +370,9 @@ if(getSong)
 		var l = data.array[a].length;
 		allNotes[a] = new Note(t1, t2, b, l);
 	}
-	console.log(allNotes[0].time + " is from the array");
+	allNotes = allNotes.reverse();
+	console.log(allNotes[0].time + " is time of first note");
+	console.log("Size of notes inn ajax : " + allNotes.length);
 	songLoaded = true;
 	});	
 	getSong = false;
@@ -417,6 +419,21 @@ if(!songPlaying)
 	songPlaying = true;
 }
 
+for(var a = allNotes.length - 1; ;)
+{
+	if(songLoaded && allNotes[a].time <= gameTime - 7000)
+	{
+		console.log("Notes are being pushed");
+		notes.push(allNotes[a]);
+		allNotes.pop();
+		console.log("Size of allNotes is: " + allNotes.length);
+		console.log("Size of notes is: " + notes.length);
+		a = allNotes.length - 1;
+	}
+	else{
+	break;
+	}
+}
 
 <!-- for( var i = 0; i < song_notes.noteTimes.note.length; i++) -->
 <!-- { -->
