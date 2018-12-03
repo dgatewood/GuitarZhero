@@ -57,9 +57,8 @@ function Note(t1, t2, b, l){
 function drawNotes(progress){
 	for(var i = 0; i < notes.length; i++)
 	{
-	
 		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
-		if(notes[i].time <= gameTime && gameTime <= notes[i].time + 5000)
+		if(notes[i].time  <= gameTime  && gameTime <= notes[i].time + 5000 )
 		{
 		var per = ((gameTime - notes[i].time)/5000);
 		var y = (per * 100) + (per * per * 400)  + 45;
@@ -154,6 +153,13 @@ function drawNotes(progress){
 				}
 			}
 		}
+	}
+	
+	///We should be popping
+	///is notes[i].time >= gameTime.. get rid of it..
+	if(notes[i].time >= gameTime - 250)
+	{
+		notes.splice(i, 1);
 	}
 	}
 }
@@ -358,10 +364,7 @@ function loadingScreen(){
 if(getSong)
 {
 	$.getJSON( "notes.json", function(data){
-	console.log("This is the data" + data);
 	song_notes = data;
-	///accessing the data the right way
-	console.log("accessing data " + data.array[0].time);
 	for(var a = data.array.length-1; a >= 0; a--)
 	{
 		var t1 = data.array[a].time;
@@ -371,14 +374,10 @@ if(getSong)
 		allNotes[a] = new Note(t1, t2, b, l);
 	}
 	allNotes = allNotes.reverse();
-	console.log(allNotes[0].time + " is time of first note");
-	console.log("Size of notes inn ajax : " + allNotes.length);
 	songLoaded = true;
 	});	
 	getSong = false;
 }
-
-///console.log("This is outside of getsong" + song_notes.array[0].time);
 
 	ctx.clearRect(0, 0 , 1200, 1200);
 	ctx.fillText("Guitar Zhero", 100, 100);
@@ -419,9 +418,10 @@ if(!songPlaying)
 	songPlaying = true;
 }
 
-for(var a = allNotes.length - 1; ;)
+
+for(var a = allNotes.length - 1; a >= 0; )
 {
-	if(songLoaded && allNotes[a].time <= gameTime - 7000)
+	if(songPlaying && allNotes[a].time < gameTime + 5000  && allNotes[a].time > gameTime)
 	{
 		console.log("Notes are being pushed");
 		notes.push(allNotes[a]);
