@@ -55,11 +55,13 @@ function Note(t1, t2, b, l){
 }
 
 function drawNotes(progress){
-	for(var i = 0; i < notes.length; i++)
+	//for(var i = 0; i < notes.length; i++)
+	for(var i = 0; notes[i].time < gameTime; i++)
 	{
-		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
-		if(notes[i].time  <= gameTime  && gameTime <= notes[i].time + 5000 )
+		//console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
+		if(notes[i].time  <= gameTime )
 		{
+		//console.log("NOTE SHOUOLD BE PLAYED");
 		var per = ((gameTime - notes[i].time)/5000);
 		var y = (per * 100) + (per * per * 400)  + 45;
 		
@@ -153,14 +155,17 @@ function drawNotes(progress){
 				}
 			}
 		}
+		///We should be popping
+	///is notes[i].time >= gameTime.. get rid of it..
+	if(notes[i].time < gameTime - 5050 )
+	{
+		console.log("99999999999999999Note is being spliced");
+		notes.splice(i, 1);
+		i--;
+	}
 	}
 	
-	///We should be popping
-	///is notes[i].time >= gameTime.. get rid of it..
-	if(notes[i].time >= gameTime - 250)
-	{
-		notes.splice(i, 1);
-	}
+	
 	}
 }
 
@@ -371,9 +376,9 @@ if(getSong)
 		var t2 = data.array[a].type;
 		var b = data.array[a].button;
 		var l = data.array[a].length;
-		allNotes[a] = new Note(t1, t2, b, l);
+		notes[a] = new Note(t1, t2, b, l);
 	}
-	allNotes = allNotes.reverse();
+	//allNotes = allNotes.reverse();
 	songLoaded = true;
 	});	
 	getSong = false;
@@ -419,21 +424,21 @@ if(!songPlaying)
 }
 
 
-for(var a = allNotes.length - 1; a >= 0; )
-{
-	if(songPlaying && allNotes[a].time < gameTime + 5000  && allNotes[a].time > gameTime)
-	{
-		console.log("Notes are being pushed");
-		notes.push(allNotes[a]);
-		allNotes.pop();
-		console.log("Size of allNotes is: " + allNotes.length);
-		console.log("Size of notes is: " + notes.length);
-		a = allNotes.length - 1;
-	}
-	else{
-	break;
-	}
-}
+<!-- for(var a = allNotes.length - 1; a >= 0; ) -->
+<!-- { -->
+	<!-- if(songPlaying && allNotes[a].time > gameTime - 5000) -->
+	<!-- { -->
+		<!-- console.log("Notes are being pushed"); -->
+		<!-- notes.push(allNotes[a]); -->
+		<!-- allNotes.pop(); -->
+		<!-- console.log("Size of allNotes is: " + allNotes.length); -->
+		<!-- console.log("Size of notes is: " + notes.length); -->
+		<!-- a = allNotes.length - 1; -->
+	<!-- } -->
+	<!-- else{ -->
+	<!-- break; -->
+	<!-- } -->
+<!-- } -->
 
 <!-- for( var i = 0; i < song_notes.noteTimes.note.length; i++) -->
 <!-- { -->
