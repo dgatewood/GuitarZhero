@@ -40,11 +40,20 @@ var song_notes = {};
 var song_notes2;
 var isLoading = true;
 var songLoaded = false;
+var resolution = 0;
+var bpms = [];
+var gameSpeed = 2000;
+
+function Bpm(t, b)
+{
+	this.time = t;
+	this.bpm = b;
+}
 
 
 var allNotes = []; // all song notes
 
-var notes = []; //song notes within 5000 ms.
+var notes = []; //song notes within gameSpeed ms.
 
 function Note(t1, t2, b, l){
 	this.time = t1;
@@ -58,11 +67,11 @@ function drawNotes(progress){
 	//for(var i = 0; i < notes.length; i++)
 	for(var i = 0; notes[i].time < gameTime; i++)
 	{
-		//console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
+		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
 		if(notes[i].time  <= gameTime )
 		{
 		//console.log("NOTE SHOUOLD BE PLAYED");
-		var per = ((gameTime - notes[i].time)/5000);
+		var per = ((gameTime - notes[i].time)/gameSpeed);
 		var y = (per * 100) + (per * per * 400)  + 45;
 		
 		if(notes[i].button == 0)
@@ -71,11 +80,11 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "green";
 			ctx.strokeStyle = "green";
-			ctx.ellipse(x+600, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+600, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
 			{
 				if(greenButton && strum)
 				{
@@ -89,11 +98,11 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "red";
 			ctx.strokeStyle = "red";
-			ctx.ellipse(x+620, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+620, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
 			{
 				if(redButton && strum)
 				{
@@ -107,11 +116,11 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "yellow";
 			ctx.strokeStyle = "yellow";
-			ctx.ellipse(x, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
 			{
 				if(yellowButton && strum)
 				{
@@ -125,11 +134,11 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "blue";
 			ctx.strokeStyle = "blue";
-			ctx.ellipse(x+660, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+660, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
 			{
 				if(blueButton && strum)
 				{
@@ -143,11 +152,11 @@ function drawNotes(progress){
 			ctx.beginPath();
 			ctx.fillStyle = "orange";
 			ctx.strokeStyle = "orange";
-			ctx.ellipse(x+680, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), 3.75 + ( 11.25 * (gameTime - notes[i].time)/5000), Math.PI / 2, 0, 2 * Math.PI);
+			ctx.ellipse(x+680, y, 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), 3.75 + ( 11.25 * (gameTime - notes[i].time)/gameSpeed), Math.PI / 2, 0, 2 * Math.PI);
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + 4700 && gameTime <= notes[i].time + 5300)
+			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
 			{
 				if(orangeButton && strum)
 				{
@@ -159,10 +168,10 @@ function drawNotes(progress){
 	///is notes[i].time >= gameTime.. get rid of it..
 	if(notes[i].time < gameTime - 5050 )
 	{
-		console.log("99999999999999999Note is being spliced");
 		notes.splice(i, 1);
 		i--;
 	}
+	
 	}
 	
 	
@@ -370,14 +379,27 @@ if(getSong)
 {
 	$.getJSON( "notes.json", function(data){
 	song_notes = data;
-	for(var a = data.array.length-1; a >= 0; a--)
+	var currentBpm = 0;
+	var bpmsCount = 0;
+	resolution = data.resolution;
+	for(var a = 0; a < data.bpm.length; a++)
 	{
-		var t1 = data.array[a].time;
+		bpms[a] = new Bpm(data.bpm[a].time, data.bpm[a].bpm);
+	}
+	for(var a = 0; a < data.array.length; a++)
+	{
+		if(data.array[a].time >= bpms[bpmsCount].time)
+		{
+			currentBpm = bpms[bpmsCount].bpm/1000;
+			bpmsCount++;
+		}
+		var t1 = ((data.array[a].time * 60)/(currentBpm * resolution))*1000;
 		var t2 = data.array[a].type;
 		var b = data.array[a].button;
 		var l = data.array[a].length;
 		notes[a] = new Note(t1, t2, b, l);
 	}
+	
 	//allNotes = allNotes.reverse();
 	songLoaded = true;
 	});	
@@ -416,46 +438,21 @@ if(getSong)
 
 function draw(timestamp)
 {
-if(!songPlaying)
+if(!songPlaying && songLoaded)
 {
 	audio.play();
 	console.log("A song should be playing");
 	songPlaying = true;
 }
 
-
-<!-- for(var a = allNotes.length - 1; a >= 0; ) -->
-<!-- { -->
-	<!-- if(songPlaying && allNotes[a].time > gameTime - 5000) -->
-	<!-- { -->
-		<!-- console.log("Notes are being pushed"); -->
-		<!-- notes.push(allNotes[a]); -->
-		<!-- allNotes.pop(); -->
-		<!-- console.log("Size of allNotes is: " + allNotes.length); -->
-		<!-- console.log("Size of notes is: " + notes.length); -->
-		<!-- a = allNotes.length - 1; -->
-	<!-- } -->
-	<!-- else{ -->
-	<!-- break; -->
-	<!-- } -->
-<!-- } -->
-
-<!-- for( var i = 0; i < song_notes.noteTimes.note.length; i++) -->
-<!-- { -->
-	<!-- console.log(song_notes.noteTimes.note[i].time); -->
-	<!-- if(song_notes.noteTimes[i].time > gameTime - 7000) -->
-	<!-- { -->
-		<!-- new Note(song_notes.noteTimes[i].time, "N", song_notes.noteTimes[i].button, song_notes.noteTimes[i].length); -->
-		<!-- notes.push(new Note(song_notes.noteTimes.note[i].time, "N", song_notes.noteTimes.note[i].button, song_notes.noteTimes.note[i].length)); -->
-		<!-- console.log("Added a note to notes"); -->
-	<!-- } -->
-<!-- } -->
-
 ctx.clearRect(0,0,1400,1000);
 var progress = timestamp - lastRender;
 drawNeck();
 drawNotes(progress);
+if(songPlaying)
+{
 gameTime += progress;
+}
 lastRender = timestamp;
 requestAnimationFrame(draw);
 }
