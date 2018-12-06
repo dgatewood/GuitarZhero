@@ -65,8 +65,12 @@ function Note(t1, t2, b, l){
 
 function drawNotes(progress){
 	//for(var i = 0; i < notes.length; i++)
-	for(var i = 0; notes[i].time < gameTime; i++)
+	for(var i = 0; i < notes.length; i++)
 	{
+		if(notes[i].time > gameTime)
+		{
+			break;
+		}
 		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
 		if(notes[i].time  <= gameTime )
 		{
@@ -166,7 +170,7 @@ function drawNotes(progress){
 		}
 		///We should be popping
 	///is notes[i].time >= gameTime.. get rid of it..
-	if(notes[i].time < gameTime - 5050 )
+	if(notes[i].time < gameTime - (gameSpeed + 50) )
 	{
 		notes.splice(i, 1);
 		i--;
