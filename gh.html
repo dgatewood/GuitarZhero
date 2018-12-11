@@ -23,6 +23,16 @@ var settingsB = new Image();
 settingsB.src = "settings1.png";
 var startB = new Image();
 startB.src = "start1.png";
+var buttonAnim = [];
+function Anim(b1, b2, b3, b4, b5)
+{
+	this.b1 = b1;
+	this.b2 = b2;
+	this.b3 = b3;
+	this.b4 = b4;
+	this.b5 = b5;
+	this.seq = 0; //there may be 4-8 sequences
+}
 var x = 0;
 var y = 0;
 var mouseIsDown = false;
@@ -110,12 +120,13 @@ function drawNotes(){
 	//for(var i = 0; i < notes.length; i++)
 	for(var i = 0; i < notes.length; i++)
 	{
-		console.log("notes length is: " + notes.length);
+		//console.log("notes length is: " + notes.length);
+		//console.log("note time at i " + notes[i].time)
 		if(notes[i].time > gameTime)
 		{
 			break;
 		}
-		//console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
+		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
 		if(notes[i].time  <= gameTime )
 		{
 		//console.log("NOTE SHOUOLD BE PLAYED");
@@ -198,6 +209,10 @@ function drawNotes(){
 					streakNum++;
 					}
 				//pop the note so we can get extra scoring for it
+				strum = false;
+				buttonAnim.push(new Anim(notes[i].buttons[0],notes[i].buttons[1],
+											notes[i].buttons[2],notes[i].buttons[3],
+											notes[i].buttons[4]));
 				notes.splice(i, 1);
 				i--;
 				continue;
@@ -205,6 +220,7 @@ function drawNotes(){
 		else if(strum)
 		{
 			streakNum = 1;
+			strum = false;
 		}
 		
 		///We should be popping
