@@ -16,11 +16,17 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 canvas.addEventListener("mousedown", getPosition, false);
 canvas.addEventListener("mouseup", getPosition2, false);
-
+document.addEventListener("mousemove", mouseMoveHandler, false);
+var start = new Image();
+start.src = "start.png";
+var settingsB = new Image();
+settingsB.src = "settings1.png";
+var startB = new Image();
+startB.src = "start1.png";
 var x = 0;
 var y = 0;
 var mouseIsDown = false;
-
+var timeMouseIsDown =0;
 var lP = false;
 var rP = false;
 var uP = false;
@@ -67,7 +73,40 @@ function Note(t1, t2, bs, l){
 	//this.y = 0;
 }
 
-function drawNotes(progress){
+function mouseMoveHandler(e) {
+    var x = e.clientX - canvas.offsetLeft;
+    var y = e.clientY - canvas.offsetTop;
+	
+	if(isLoading)
+	{
+		if(	x >= 490 &&       
+		x <= 490 + 300 &&    
+		y > 350 &&         
+		y <= 350 + 150)
+			{
+				startB.src = "start2.png";
+				
+			}
+	else
+	{
+		startB.src = "start1.png";
+	}
+	if(	x >= 490 &&
+		x <= 490 + 300 &&  
+		y >= 500 &&     
+		y <= 500 + 150)
+			{
+				console.log("This should be changing pictures");
+				settingsB.src = "settings2.png";
+			}
+	else
+	{
+		settingsB.src = "settings1.png";
+	}
+	}
+}
+
+function drawNotes(){
 	//for(var i = 0; i < notes.length; i++)
 	for(var i = 0; i < notes.length; i++)
 	{
@@ -76,7 +115,7 @@ function drawNotes(progress){
 		{
 			break;
 		}
-		console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
+		//console.log("Notes[a] time is: " + notes[i].time + "  and gameTime = " + gameTime);
 		if(notes[i].time  <= gameTime )
 		{
 		//console.log("NOTE SHOUOLD BE PLAYED");
@@ -93,19 +132,6 @@ function drawNotes(progress){
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
-			{
-				if(greenButton && strum)
-				{
-					score += 10 * streakNum;
-					notesInRow++;
-					if(notesInRow%8 == 0 && streakNum < 5)
-					{
-					streakNum++;
-					}
-					//console.log("Congrats dude");
-				}
-			}
 		}
 		if(notes[i].buttons[1])
 		{
@@ -117,18 +143,6 @@ function drawNotes(progress){
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
-			{
-				if(redButton && strum)
-				{
-					score += 10 * streakNum;
-					notesInRow++;
-					if(notesInRow%8 == 0 && streakNum < 5)
-					{
-					streakNum++;
-					}
-				}
-			}
 		}
 		if(notes[i].buttons[2])
 		{
@@ -140,19 +154,7 @@ function drawNotes(progress){
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
-			{
-				if(yellowButton && strum)
-				{
-					
-					score += 10 * streakNum;
-					notesInRow++;
-					if(notesInRow%8 == 0 && streakNum < 5)
-					{
-					streakNum++;
-					}
-				}
-			}
+			
 		}
 		if(notes[i].buttons[3])
 		{
@@ -164,19 +166,6 @@ function drawNotes(progress){
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
-			{
-				if(blueButton && strum)
-				{
-					
-					score += 10 * streakNum;
-					notesInRow++;
-					if(notesInRow%8 == 0 && streakNum < 5)
-					{
-					streakNum++;
-					}
-				}
-			}
 		}
 		if(notes[i].buttons[4])
 		{
@@ -188,20 +177,36 @@ function drawNotes(progress){
 			ctx.fill();
 			ctx.stroke();
 			
-			if(gameTime >= notes[i].time + (gameSpeed - 300) && gameTime <= notes[i].time + (gameSpeed + 300))
+		}
+		
+		///scoring
+		if((notes[i].buttons[0] || notes[i].buttons[1] ||
+			notes[i].buttons[2] || notes[i].buttons[3] ||
+			notes[i].buttons[4]) && 
+			(greenButton == notes[i].buttons[0] &&
+			redButton == notes[i].buttons[1] &&
+			yellowButton == notes[i].buttons[2] &&
+			blueButton == notes[i].buttons[3] &&
+			orangeButton == notes[i].buttons[4]) &&
+			strum && (gameTime >= notes[i].time + (gameSpeed - 50) && 
+					gameTime <= notes[i].time + (gameSpeed + 50)))
 			{
-				if(orangeButton && strum)
-				{
-					
-					score += 10 * streakNum;
-					notesInRow++;
-					if(notesInRow%8 == 0 && streakNum < 5)
+				score += 10 * streakNum;
+				notesInRow++;
+				if(notesInRow%8 == 0 && streakNum < 5)
 					{
 					streakNum++;
 					}
-				}
+				//pop the note so we can get extra scoring for it
+				notes.splice(i, 1);
+				i--;
+				continue;
 			}
+		else if(strum)
+		{
+			streakNum = 1;
 		}
+		
 		///We should be popping
 	///is notes[i].time >= gameTime.. get rid of it..
 	
@@ -225,7 +230,7 @@ function getPosition(event)
   x = event.x - canvas.offsetLeft;
   y = event.y - canvas.offsetTop;
 	mouseIsDown = true;
-	console.log("Mouse is pressed");
+	//console.log("Mouse is pressed");
   //alert("x:" + x + " y:" + y);
 }
 
@@ -418,7 +423,8 @@ ctx.fill();
 ctx.closePath();	
 }
 
-function loadingScreen(){
+function loadingScreen(timestamp){
+console.log("Game time is : " + gameTime);
 if(getSong)
 {
 	$.getJSON( "notes.json", function(data){
@@ -443,7 +449,7 @@ if(getSong)
 		var t1 = ((data.array[a].time * 60)/(currentBpm * resolution))*1000;
 		if(t1 === prevTime){
 			notes[pos - 1].buttons[data.array[a].button] = true;
-				console.log(notes[notes.length-1]);
+				//console.log(notes[notes.length-1]);
 			}
 		else{
 			var t2 = data.array[a].type;
@@ -463,25 +469,20 @@ if(getSong)
 	getSong = false;
 }
 
-	ctx.clearRect(0, 0 , 1200, 1200);
-	ctx.fillText("Guitar Zhero", 100, 100);
-	////ctx.fillStyle = "red";
-	if(mouseIsDown)
-	{
-		ctx.fillStyle = "red";
-		ctx.beginPath();
-		ctx.rect(250, 250, 200,200);
-		ctx.fill();
-		ctx.fillStyle = "black";
-		ctx.beginPath();
-		ctx.rect(270, 270, 160,160);
-		ctx.fill();
-		isLoading = false;
-	}
-	else{
-		ctx.fillStyle = "red";
-		ctx.fillRect(250, 250, 200,200);
-	}
+	ctx.clearRect(0, 0 , 1400, 1400);
+	ctx.drawImage(start, 0, 0);
+	ctx.drawImage(startB, 490, 350);
+	ctx.drawImage(settingsB, 490, 500);
+	
+	if(mouseIsDown && x >= 490 &&       
+					x <= 490 + 300 &&    
+					y > 350 &&         
+					y <= 350 + 150)
+				{
+					isLoading = false;
+					timeMouseIsDown = timestamp;
+				}
+
 	if(!isLoading)
 	{
 	ctx.clearRect(0,0,1200,1400);
@@ -495,15 +496,17 @@ if(getSong)
 
 function draw(timestamp)
 {
-if(!songPlaying && songLoaded)
+var currentTimeStamp = timestamp - timeMouseIsDown;
+console.log("Game time is : " + gameTime);
+if(!songPlaying)
 {
 	audio.play();
-	console.log("A song should be playing");
+	//console.log("A song should be playing");
 	songPlaying = true;
 }
 
 ctx.clearRect(0,0,1400,1000);
-var progress = timestamp - lastRender;
+var progress = currentTimeStamp - lastRender;
 drawScore();
 drawNeck();
 drawNotes(progress);
@@ -511,7 +514,8 @@ if(songPlaying)
 {
 gameTime += progress;
 }
-lastRender = timestamp;
+
+lastRender = currentTimeStamp;
 requestAnimationFrame(draw);
 }
 
