@@ -346,72 +346,11 @@ line(613.33,45 ,533.33,540);
 line(640   ,45 ,640   ,540);
 line(666.66,45 ,746.66,540);
 line(693.33,45 ,853.33,540);
-ctx.beginPath();
-if(greenButton)
-{
-ctx.fillStyle = "green";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "green";
-ctx.ellipse(426.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(redButton)
-{
-ctx.fillStyle = "red";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "red";
-ctx.ellipse(533.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(yellowButton)
-{
-ctx.fillStyle = "yellow";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "yellow";
-ctx.ellipse(640, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(blueButton)
-{
-ctx.fillStyle = "blue";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "blue";
-ctx.ellipse(746.6, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-ctx.beginPath();
-if(orangeButton)
-{
-ctx.fillStyle = "orange";
-}
-else
-{
-ctx.fillStyle = "#eee";
-}
-ctx.strokeStyle = "orange";
-ctx.ellipse(853.3, 540, 15, 15, Math.PI / 2, 0, 2 * Math.PI);
-ctx.fill();
-ctx.stroke();
-
+circle(426.6, 540, 15,  greenButton ? "green"  : "#eee", "green" );
+circle(533.3, 540, 15,    redButton ? "red"    : "#eee", "red"   );
+circle(640  , 540, 15, yellowButton ? "yellow" : "#eee", "yellow");
+circle(746.6, 540, 15,   blueButton ? "blue"   : "#eee", "blue"  );
+circle(853.3, 540, 15, orangeButton ? "orange" : "#eee", "orange");
 }
 function line(x1, y1, x2, y2, col = "black")
 {
